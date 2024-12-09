@@ -1,0 +1,31 @@
+.sugestoes{
+    background: #fff;
+
+    list-style: none;
+    padding: 7px;
+    border: 1px solid #998e8e;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+#btnExcel{
+    size: large;
+    margin-right: 545px;
+    width: 543px;
+    border-radius: 5px;
+    background-color: #0078d4;
+    border-color: #0078d4;
+    color: aliceblue;
+    display: flex;
+
+}
+#btnPDF{
+margin-top: -30px;
+size: large;
+margin-left: 545px;
+width: 550px;
+border-radius: 5px;
+background-color: #0078d4;
+border-color: #0078d4;
+color: aliceblue;
+display: flex;
+}
