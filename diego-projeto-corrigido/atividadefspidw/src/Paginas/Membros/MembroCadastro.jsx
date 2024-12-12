@@ -24,7 +24,7 @@ function MembroCadastro() {
 
     try {
       // Chama o serviço para salvar o membro
-      await membroService.salvar(membro);
+      await membroService.adicionar(membro);
       setSucessoMensagem('Membro cadastrado com sucesso!');
       
       // Redireciona para a página de listagem de membros após 2 segundos

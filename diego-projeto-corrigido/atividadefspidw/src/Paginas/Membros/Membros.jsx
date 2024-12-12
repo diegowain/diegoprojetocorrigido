@@ -78,9 +78,12 @@ function Membros() {
                                 <tr>
                                     <th>Código</th>
                                     <th>Nome</th>
-                                    <th>Email</th>
+                                    <th>CPF</th>
+                                    <th>Genero</th>
                                     <th>Telefone</th>
-                                    <th>Função</th>
+                                    <th>Email</th>
+                                    <th>Endereço</th>
+                                    <th>Ativo</th>
                                     <th><FaCog /></th>
                                 </tr>
                             </thead>
@@ -88,12 +91,15 @@ function Membros() {
                                 {
                                     listaMembros.length <=0? "Nenhum membro registrado." :
                                         listaMembros.map(membro => (
-                                            <tr key={membro.id}>
+                                            <tr>
                                                 <td>{membro.id}</td>
                                                 <td>{membro.nome}</td>
-                                                <td>{membro.email}</td>
+                                                <td>{membro.cpf}</td>
+                                                <td>{membro.genero}</td>
                                                 <td>{membro.telefone}</td>
-                                                <td>{membro.funcao}</td>
+                                                <td>{membro.email}</td>
+                                                <td>{membro.endereco}</td>
+                                                <td>{membro.ativo}</td>
                                                 <td id="BotoesTabela">
                                                     <Link to={`/membros/${membro.id}`} className="btn btn-warning m-1">
                                                         <FaEdit /> Alterar
