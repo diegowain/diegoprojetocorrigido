@@ -14,7 +14,7 @@ class MembroModel {
      
     }
 
-    async obterTodos( ){
+    async listar( ){
         const listaMembros = await database.ExecutaComando('select * from membros ORDER BY nome')
         return listaMembros
     }
