@@ -1,7 +1,7 @@
-const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = 'http://localhost:3006';
 
 class MembroService {
-    async obterTodos() {
+    async listar() {
         const response = await fetch(`${API_BASE_URL}/membro`, {
             headers: {
                 'Content-Type': 'application/json'
@@ -47,9 +47,9 @@ class MembroService {
         }
     }
 
-    async atualizar(idMembro, membroDados) {
+    async atualizar(id, membroDados) {
         try {
-            const response = await fetch(`${API_BASE_URL}/membro/${idMembro}`, {
+            const response = await fetch(`${API_BASE_URL}/membro/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -65,9 +65,9 @@ class MembroService {
         }
     }
 
-    async delete(idMembro) {
+    async delete(id) {
         try {
-            const response = await fetch(`${API_BASE_URL}/membro/${idMembro}`, {
+            const response = await fetch(`${API_BASE_URL}/membro/${id}`, {
                 method: 'DELETE'
             });
             if (!response.ok) {

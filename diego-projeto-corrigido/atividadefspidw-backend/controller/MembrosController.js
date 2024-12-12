@@ -1,66 +1,66 @@
-const MembroService = require('../services/MembroService');
+const MembroModel = require('../model/entidades/MembroModel');
 
+const membroModel = new MembroModel();
 class MembrosController {
     async listar(req, res) {
         try {
-            const membros = await MembroService.obterTodos();
+            const membros = await membroModel.listar();
             res.status(200).json(membros);
         } catch (error) {
             res.status(500).json({ message: "Erro ao listar membros.", error });
         }
     }
 
-    async obterPorId(req, res) {
+    async obterPorId(req, res){
+        const id = req.params.id
+        const membro = await membroModel.obterPorId(id)
+        return res.status(200).json(membro)
+    }
+
+    async adicionar(req, res){
+        const {nome, cpf, genero,telefone, email, endereco, ativo} = req.body
+        const membro = new MembroModel (0, nome, cpf, genero,telefone, email, endereco,  ativo)
+
         try {
-            const { id } = req.params;
-            const membro = await MembroService.obterPorId(id);
-            if (membro) {
-                res.status(200).json(membro);
-            } else {
-                res.status(404).json({ message: "Membro não encontrado." });
-            }
+            await membroModel.adicionar(membro)
+            return res.status(201).json({message:'Cadastrado com sucesso!'})
         } catch (error) {
-            res.status(500).json({ message: "Erro ao obter membro.", error });
+            console.log('Erro ao cadastrar membro: ' + error)
+            res.status(500).json({error: 'Erro ao cadastrar membro'})
         }
     }
 
-    async adicionar(req, res) {
-        try {
-            const novoMembro = req.body;
-            const membroCriado = await MembroService.adicionar(novoMembro);
-            res.status(201).json(membroCriado);
-        } catch (error) {
-            res.status(500).json({ message: "Erro ao adicionar membro.", error });
-        }
-    }
 
-    async atualizar(req, res) {
+    async atualizar(req, res){
+        const id = req.params.id
+        const {nome, cpf, genero,telefone, email, endereco, ativo} = req.body
+        const membro = new EventoModel (id, nome, cpf, genero,telefone, email, endereco,  ativo)
+
         try {
-            const { id } = req.params;
-            const membroAtualizado = await MembroService.atualizar(id, req.body);
-            if (membroAtualizado) {
-                res.status(200).json(membroAtualizado);
-            } else {
-                res.status(404).json({ message: "Membro não encontrado." });
-            }
+            await membroModel.atualizar(id, membro)
+            return res.status(201).json({message:'Atualizado com sucesso!'})
         } catch (error) {
-            res.status(500).json({ message: "Erro ao atualizar membro.", error });
+            console.log('Erro ao atualizar o evento: ' + error)
+            res.status(500).json({error: 'Erro ao atualizar evento'})
         }
     }
 
     async excluir(req, res) {
+        const id = req.params.id
         try {
-            const { id } = req.params;
-            const sucesso = await MembroService.excluir(id);
-            if (sucesso) {
-                res.status(200).json({ message: "Membro excluído com sucesso." });
-            } else {
-                res.status(404).json({ message: "Membro não encontrado." });
-            }
+            await membroModel.delete(id)
+            res.status(200).json({message:'Excluído com sucesso.'})
         } catch (error) {
-            res.status(500).json({ message: "Erro ao excluir membro.", error });
+            console.log('Erro ao excluir evento', error)
+            res.status(500).json({error: 'Erro ao excluir membro'})
         }
+    }
+
+    async filtrar(req, res){
+        const termobusca = req.params.termobusca
+        const membros = await membroModel.filtrar(termobusca)
+        return res.status(200).json(membros)
     }
 }
 
-module.exports = new MembrosController();
+module.exports =  MembrosController

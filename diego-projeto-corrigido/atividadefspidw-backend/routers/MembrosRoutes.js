@@ -1,11 +1,13 @@
-const express = require('express');
-const MembrosController = require('../controller/MembrosController');
-const router = express.Router();
+const MembrosController = require('../controller/MembrosController')
+const membroController = new MembrosController( )
+const express = require('express')
+const router = express.Router( )
 
-router.get('/', MembrosController.listar);
-router.get('/:id', MembrosController.obterPorId);
-router.post('/', MembrosController.adicionar);
-router.put('/:id', MembrosController.atualizar);
-router.delete('/:id', MembrosController.excluir);
+router.get('/membro', membroController.listar);
+router.get('/membro/:id', membroController.obterPorId);
+router.post('/membro', membroController.adicionar);
+router.put('/membro/:id', membroController.atualizar);
+router.delete('/membro/:id', membroController.excluir);
+router.get('/membro/filtrar/:termobusca', membroController.filtrar);
 
 module.exports = router;

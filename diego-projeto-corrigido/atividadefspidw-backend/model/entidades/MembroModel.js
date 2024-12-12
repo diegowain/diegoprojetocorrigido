@@ -1,37 +1,49 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../../config/database'); // Certifique-se de que o caminho para o arquivo de configuração do banco está correto.
+const Database = require("../database")
 
-const Membro = sequelize.define('Membro', {
-    nome: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: true
-        }
-    },
-    telefone: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    funcao: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    dataEntrada: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
+const database = new Database( )
+class MembroModel {
+    constructor( id,nome, cpf, genero, telefone, email, endereco, ativo){
+        this.id = id
+        this.nome = nome
+        this.cpf = cpf
+        this.genero = genero
+        this.telefone = telefone
+        this.email = email
+        this.endereco = endereco
+        this.ativo = ativo
+     
     }
-}, {
-    tableName: 'membros',
-    timestamps: true // Isso cria as colunas createdAt e updatedAt automaticamente
-});
 
-// Certifique-se de que o sequelize.sync() ou o gerenciamento de migrações está sendo chamado corretamente em outro lugar no seu projeto.
+    async obterTodos( ){
+        const listaMembros = await database.ExecutaComando('select * from membros ORDER BY nome')
+        return listaMembros
+    }
 
-module.exports = Membro;
+    async obterPorId(id) {
+        const result = await database.ExecutaComando('select * from membros where id=? ',[id])
+        return result[0]
+    }
+
+    async adicionar(dadosMembro){
+        await database.ExecutaComandoNonQuery('insert into membros set ?', dadosMembro)
+    }
+
+    async atualizar(id, dadosMembro){
+        await database.ExecutaComandoNonQuery('update membros set ? where id = ?',[
+            dadosMembro,
+            id
+        ])
+    }
+    async delete (id){
+        await database.ExecutaComandoNonQuery('delete from membros where id = ?',[id])
+    }
+
+    async filtrar (termobusca) {
+        const membros = await database.ExecutaComando('select * from membros where nome like ?',
+            [`%${termobusca}%`]
+        )
+        return membros
+    }
+}
+
+module.exports = MembroModel

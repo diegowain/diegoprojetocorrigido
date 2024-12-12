@@ -1,9 +1,13 @@
 import './Eventos.css'
-import {FaCog, FaEdit, FaListAlt, FaPlusCircle, FaSearchPlus, FaTrash} from "react-icons/fa"
+import {FaCog, FaEdit, FaListAlt, FaPlusCircle, FaSearchPlus, FaTrash, FaFileExcel, FaFilePdf} from "react-icons/fa"
 import {useEffect, useState} from "react"
 import {Container, Card, Row, Col, Button, Form, Table} from "react-bootstrap"
 import {Link} from 'react-router-dom'
 import EventoService from '../../services/EventoService'
+import * as XLSX from 'xlsx'; // Importação corrigida
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
 
 const eventoService = new EventoService ( )
 function Eventos ( ) {
@@ -48,6 +52,51 @@ function Eventos ( ) {
         setListaEventos(novosEventos)
         localStorage.setItem('evento',JSON.stringify(novosEventos)) */
 
+        const exportarExcel = () => {
+            const dadosExportacao = listaEventos.map((evento) => ({
+                Código: evento.id,
+                Título: evento.titulo,
+                Quantidade: evento.quantidade,
+                'Data de Início': evento.data,
+                'Data de Fim': evento.datab,
+                'Horário de Início': evento.hora,
+                'Horário de Fim': evento.horab,
+            }));
+    
+            const ws = XLSX.utils.json_to_sheet(dadosExportacao);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Eventos');
+            XLSX.writeFile(wb, 'Eventos.xlsx');
+        };
+    
+        const exportarPDF = () => {
+            const doc = new jsPDF();
+            const colunas = [
+                'Código',
+                'Título',
+                'Quantidade',
+                'Data de Início',
+                'Data de Fim',
+                'Horário de Início',
+                'Horário de Fim',
+            ];
+            const linhas = listaEventos.map((evento) => [
+                evento.id,
+                evento.titulo,
+                evento.quantidade,
+                evento.data,
+                evento.datab,
+                evento.hora,
+                evento.horab,
+            ]);
+    
+            doc.text('Lista de Eventos', 20, 10);
+            doc.autoTable({
+                head: [colunas],
+                body: linhas,
+            });
+            doc.save('Eventos.pdf');
+        };
 
     return (<>
         <h1><FaListAlt></FaListAlt> Eventos</h1>
@@ -73,6 +122,17 @@ function Eventos ( ) {
                 </div>
             </Row>
             <br></br>
+            <Row>
+                            <Col>
+                                <Button onClick={exportarExcel} variant="success" className="m-1">
+                                    <FaFileExcel /> Exportar Excel
+                                </Button>
+                                <Button onClick={exportarPDF} variant="danger" className="m-1">
+                                    <FaFilePdf /> Exportar PDF
+                                </Button>
+                            </Col>
+                        </Row>
+                        <br />
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -100,7 +160,7 @@ function Eventos ( ) {
                             <td>{evento.horab}</td>
                             <td id="BotoesTabela">
                                 <Link to = {`/eventos/${evento.id}`} className="btn btn-warning m-1"><FaEdit></FaEdit> Alterar</Link>
-                                <Button onClick={( )=> handleExcluir(evento.id)} className="btn btn-danger m-1"><FaTrash></FaTrash> Excluír</Button>
+                                <Button onClick={( )=> handleExcluir(evento.id)} className="btn btn-danger m-1"><FaTrash></FaTrash> Excluir</Button>
                             </td>
                         </tr>
                         ))

@@ -187,9 +187,11 @@ function DoacaoCadastro() {
                                     </Form.Group>
                                 </Col>
                             </Row>
-                            <Button type="submit" variant="success" className="mt-4">
-                                <FaRegSave /> Salvar
+                            <div className='d-grid'>
+                            <Button id="BotaoSalvarDespesa"type="submit" widht="100%"  size='lg' variant="success" className="mt-4">
+                                <FaRegSave /> 
                             </Button>
+                            </div>
                         </Form>
                     </Card.Body>
                 </Card>

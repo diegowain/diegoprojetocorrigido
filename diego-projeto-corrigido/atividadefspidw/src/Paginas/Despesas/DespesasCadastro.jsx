@@ -194,7 +194,7 @@ function DespesasCadastro ( ) {
                         <option value="Recorrente">Recorrente</option>
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
-                            Selecione a duracao da despesa
+                            Selecione a duração da despesa
                     </Form.Control.Feedback>
             </Form.Group>
             </Col>

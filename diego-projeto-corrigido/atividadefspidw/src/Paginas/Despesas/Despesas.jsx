@@ -100,7 +100,7 @@ function Despesas ( ) {
                             <td>{despesa.horario}</td>
                             <td id="BotoesTabela">
                                 <Link to = {`/despesas/${despesa.id}`} className="btn btn-warning m-1"><FaEdit></FaEdit> Alterar</Link>
-                                <Button onClick={( )=> handleExcluir(despesa.id)} className="btn btn-danger m-1"><FaTrash></FaTrash> Excluír</Button>
+                                <Button onClick={( )=> handleExcluir(despesa.id)} className="btn btn-danger m-1"><FaTrash></FaTrash> Excluir</Button>
                             </td>
                         </tr>
                         ))

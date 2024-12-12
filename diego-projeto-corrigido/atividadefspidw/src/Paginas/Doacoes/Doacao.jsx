@@ -1,4 +1,4 @@
-import {FaCog, FaEdit, FaListAlt, FaPlusCircle, FaSearchPlus, FaTrash} from "react-icons/fa"
+import {FaCog, FaEdit, FaListAlt, FaPlusCircle, FaSearchPlus, FaTrash, FaFileExcel, FaFilePdf} from "react-icons/fa"
 import {useEffect, useState} from "react"
 import {Container, Card, Row, Col, Button, Form, Table} from "react-bootstrap"
 import * as XLSX from 'xlsx';
@@ -98,9 +98,7 @@ function Doacao ( ) {
                 <div className="d-grid">
                 <Button size="lg" as={Link} to='/doacoes/novo' variant="primary"><FaPlusCircle></FaPlusCircle></Button>
                 </div>
-                <br />
-                <button id = "btnExcel" onClick={exportarExcel}>Exportar para Excel</button>
-                <button id="btnPDF" onClick={exportarPDF}>Exportar para PDF</button>
+              
         </Col>
 
         <br></br>
@@ -116,6 +114,17 @@ function Doacao ( ) {
                 </div>
             </Row>
             <br></br>
+            <Row>
+                            <Col>
+                                <Button onClick={exportarExcel} variant="success" className="m-1">
+                                    <FaFileExcel /> Exportar Excel
+                                </Button>
+                                <Button onClick={exportarPDF} variant="danger" className="m-1">
+                                    <FaFilePdf /> Exportar PDF
+                                </Button>
+                            </Col>
+                        </Row>
+                        <br />
             <Table striped bordered hover>
                 <thead>
                     <tr>

@@ -24,7 +24,7 @@ function Membros() {
             dados = await membroService.filtrar(termoBusca);
             setListaMembros(dados);
         } else {
-            dados = await membroService.obterTodos();
+            dados = await membroService.listar();
             setListaMembros(dados);
         }
     };
@@ -48,7 +48,7 @@ function Membros() {
                 <Col lg='12'>
                     <div className="d-grid">
                         <Button size="lg" as={Link} to='/membros/novo' variant="primary">
-                            <FaPlusCircle /> Adicionar Membro
+                            <FaPlusCircle />  
                         </Button>
                     </div>
                 </Col>
@@ -68,7 +68,7 @@ function Membros() {
                                     placeholder="Nome"
                                 />
                                 <Button onClick={handleFiltrar} variant="primary">
-                                    <FaSearchPlus /> Pesquisar
+                                    <FaSearchPlus /> 
                                 </Button>
                             </div>
                         </Row>
@@ -86,7 +86,7 @@ function Membros() {
                             </thead>
                             <tbody>
                                 {
-                                    listaMembros.length <= 0 ? "Nenhum membro registrado." :
+                                    listaMembros.length <=0? "Nenhum membro registrado." :
                                         listaMembros.map(membro => (
                                             <tr key={membro.id}>
                                                 <td>{membro.id}</td>

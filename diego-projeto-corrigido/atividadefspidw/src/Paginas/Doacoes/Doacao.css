@@ -8,24 +8,14 @@
     border-bottom-right-radius: 10px;
 }
 #btnExcel{
-    size: large;
-    margin-right: 545px;
-    width: 543px;
+    background-color: green;
     border-radius: 5px;
-    background-color: #0078d4;
-    border-color: #0078d4;
+    border-color: green;
     color: aliceblue;
-    display: flex;
-
 }
 #btnPDF{
-margin-top: -30px;
-size: large;
-margin-left: 545px;
-width: 550px;
-border-radius: 5px;
-background-color: #0078d4;
-border-color: #0078d4;
-color: aliceblue;
-display: flex;
+    background-color: red;
+    border-radius: 5px;
+    border-color: red;
+    color: aliceblue;
 }

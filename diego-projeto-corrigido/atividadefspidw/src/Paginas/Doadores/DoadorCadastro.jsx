@@ -289,7 +289,7 @@ function DoadorCadastro ( ) {
         </Row>
         <Col>
         <div className="d-grid">
-        <Button id="BotaoSalvarDespesa" size="lg" type="submit" variant="success m-1"><FaRegSave></FaRegSave></Button>
+        <Button id="BotaoSalvarDespesa" width="100%" size="lg" type="submit" variant="success m-1"><FaRegSave></FaRegSave></Button>
         </div>
         </Col>
     </Form>
